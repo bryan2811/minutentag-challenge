@@ -51,7 +51,11 @@
                             this.isDescriptionExpanded = !this.isDescriptionExpanded;
                         }
                     }"
-                    x-init="updateSkuData(selectedSku)">
+                    x-init="
+                    updateSkuData(selectedSku);
+                    setInterval(() => {
+                        updateSkuData(selectedSku);
+                    }, 5000)"
 
                         <div class="top-information">
                             <div class="brand-price">

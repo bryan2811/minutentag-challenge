@@ -61,7 +61,23 @@
     <button>See All</button>
   </div>
 
-  <div class="product-listing" x-data="{ products: <%= JSON.stringify(products) %> }" x-init="setInterval(() => { products.forEach(product => { fetch(`/api/stock-price/${product.skus[0].code}`).then(response => response.json()).then(data => { document.getElementById(`price-${product.id}`).textContent = '$' + (data.price / 100).toFixed(2); }); }); }, 5000)">
+  <div class="product-listing" x-data="{
+    products: <%= JSON.stringify(products) %>,
+    updatePrice: function(product) {
+      fetch(`/api/stock-price/${product.skus[0].code}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById(`price-${product.id}`).textContent = '$' + (data.price / 100).toFixed(2);
+      });
+    }
+    }" x-init="
+    products.forEach(product => {
+      updatePrice(product);
+      setInterval(() => {
+        updatePrice(product);
+      }, 5000);
+    });
+    ">
 
     <template x-for="product in products">
       <div class="product">
