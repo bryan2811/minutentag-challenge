@@ -1,0 +1,237 @@
+@use 'functions' as *;
+@use 'abstract/breakpoints' as *;
+
+@import 'reset';
+@import 'variables';
+@import 'mobile-navigation';
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+    background-color: $primary;
+    font-family: 'DM Sans', sans-serif;
+    max-width: rem(1920);
+    margin: 0 auto;
+    padding: 0 fluid(18px, 36px) rem(75) fluid(18px, 36px);
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding-top: rem(40);
+
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            appearance: none;
+            background-color: #FFF;
+            border: none;
+            cursor: pointer;
+            border-radius: rem(12);
+            padding: fluid(8, 16);
+        }
+
+        .avatar {
+            width: fluid(47px, 60px);
+            height: fluid(47px, 60px);
+            border-radius: 50%;
+        }
+    }
+
+    .welcome-section {
+        display: flex;
+        flex-direction: column;
+        gap: rem(5);
+
+        span {
+            color: $gray;
+            font-size: fluid(16px, 18px);
+        }
+
+        h1 {
+            color: $dark;
+            font-weight: 700;
+            font-size: fluid(24px, 18px);
+        }
+    }
+
+    .search-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: rem(7);
+        background-color: #FFF;
+        padding: fluid(12px, 14px) fluid(16px, 18px);
+        border-radius: rem(12);
+
+        input {
+            appearance: none;
+            border: none;
+            background-color: #FFF;
+            color: $dark;
+            outline: none;
+            font-size: fluid(14px, 16px);
+            width: 100%;
+        }
+    }
+
+    .product-categories {
+        display: flex;
+        flex-direction: column;
+        gap: rem(16);
+
+        .headline {
+            display: flex;
+            justify-content: space-between;
+
+            h2 {
+                color: $dark;
+                font-weight: 700;
+                font-size: rem(18);
+            }
+
+            button {
+                appearance: none;
+                border: none;
+                background-color: transparent;
+                color: $medium-dark;
+                font-size: fluid(14px, 16px);
+                cursor: pointer;
+            }
+        }
+
+        .categories {
+            display: grid;
+            justify-content: space-between;
+            grid-template-columns: auto 1fr 0.5fr;
+            gap: fluid(14px, 16px);
+
+            @include media('>=phone') {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            button {
+                appearance: none;
+                border: none;
+                background: #FFF;
+                color: $dark;
+                font-size: fluid(16px, 18px);
+                font-weight: 500;
+                padding: fluid(16px, 18px) fluid(18px, 21px);
+                border-radius: rem(12);
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+                &:hover {
+                    background-color: $secondary;
+                    color: #FFF;
+                }
+
+                &.beer-btn {
+                    background: $secondary;
+                    color: #FFF;
+                }
+
+                &.beer-btn, &.wine-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: fluid(20px, 24px);
+                        height: fluid(20px, 24px);
+                        object-fit: contain;
+                        margin-right: rem(8);
+                    }
+                }
+            }
+        }
+    }
+
+    .product-listing-headline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            color: $dark;
+            font-weight: 700;
+            font-size: rem(18);
+        }
+
+        button {
+            appearance: none;
+            border: none;
+            background-color: transparent;
+            color: $medium-dark;
+            font-size: fluid(14px, 16px);
+            cursor: pointer;
+        }
+    }
+
+    .product-listing {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: rem(13);
+        row-gap: rem(16);
+
+        @include media('>=phone') {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .product {
+            display: grid;
+            background-color: #FFF;
+            padding: rem(16) rem(16) 0 rem(16);
+            border-radius: rem(12) rem(32) rem(12) rem(12);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            a {
+                display: flex;
+                flex-direction: column;
+                gap: rem(5);
+                place-items: center;
+                text-decoration: none;
+            }
+
+            h2 {
+                color: $dark;
+                font-weight: 500;
+                font-size: fluid(12px, 18px);
+                text-align: center;
+            }
+
+            img {
+                width: 100%;
+                height: fluid(70px, 100px);
+                object-fit: contain;
+                flex-grow: 1;
+            }
+
+            .price {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                gap: rem(8);
+                color: $dark;
+                font-size: fluid(14px, 18px);
+                font-weight: 500;
+
+                .add-to-cart {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: rem(40);
+                    height: rem(40);
+                    background-color: $secondary;
+                    border-radius: rem(8) 0;
+                }
+            }
+        }
+    }
+}

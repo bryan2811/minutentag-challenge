@@ -1,0 +1,249 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.mobile-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: min(calc(2.8125rem + 1.25 * (100vw - 22.5rem) / 77.5), 4.0625rem);
+  background-color: #FFF;
+  height: 4.375rem;
+}
+.mobile-navigation button {
+  position: relative;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  color: rgba(100, 100, 100, 0.6);
+  font-size: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+  cursor: pointer;
+}
+.mobile-navigation button svg {
+  position: relative;
+  width: min(calc(1.5rem + 0.5 * (100vw - 22.5rem) / 77.5), 2rem);
+  height: min(calc(1.5rem + 0.5 * (100vw - 22.5rem) / 77.5), 2rem);
+}
+.mobile-navigation button:hover::before {
+  content: "";
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  top: 50%;
+  left: 50%;
+  width: 2.6875rem;
+  height: 2.6875rem;
+  background-color: rgba(255, 159, 36, 0.24);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(10px);
+}
+.mobile-navigation button:hover svg {
+  color: #FF9F24;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #FAFAFA;
+  font-family: "DM Sans", sans-serif;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 min(calc(1.125rem + 1.125 * (100vw - 22.5rem) / 77.5), 2.25rem);
+}
+@media (min-width: 48rem) {
+  body {
+    padding: 0 min(calc(1.125rem + 1.125 * (100vw - 22.5rem) / 77.5), 2.25rem) 4.375rem min(calc(1.125rem + 1.125 * (100vw - 22.5rem) / 77.5), 2.25rem);
+  }
+}
+body .top-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: clamp(1.875rem, calc(3.125rem + -1.25 * (100vw - 22.5rem) / 77.5), 3.125rem);
+}
+body .top-navigation h1 {
+  font-size: min(calc(1.125rem + 0.25 * (100vw - 22.5rem) / 77.5), 1.375rem);
+  font-weight: 700;
+  color: #323232;
+}
+@media (min-width: 48rem) {
+  body .product-layout {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+body .product-img {
+  width: 100%;
+  height: min(calc(15rem + 3.75 * (100vw - 22.5rem) / 77.5), 18.75rem);
+  object-fit: contain;
+}
+body .top-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+body .top-information .brand-price {
+  display: flex;
+  justify-content: space-between;
+}
+body .top-information .brand-price h2 {
+  font-size: min(calc(1.375rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.5rem);
+  font-weight: 700;
+  color: #0F0D23;
+}
+body .top-information .brand-price span {
+  font-size: min(calc(1.375rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.5rem);
+  font-weight: 700;
+  color: #FF9F24;
+}
+body .top-information .origin-stock {
+  font-size: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+  color: #969696;
+}
+body .top-information .product-information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: min(calc(2rem + 0.375 * (100vw - 22.5rem) / 77.5), 2.375rem);
+  padding-bottom: min(calc(1.25rem + 0.25 * (100vw - 22.5rem) / 77.5), 1.5rem);
+}
+body .top-information .product-information h2 {
+  font-size: min(calc(1rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.125rem);
+  font-weight: 700;
+  color: #323232;
+}
+body .top-information .product-information .text p {
+  font-size: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+  color: #969696;
+}
+body .top-information .product-information .text button {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  color: #FF9F24;
+  font-size: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+body .top-information .sku-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8125rem;
+}
+body .top-information .sku-selector h2 {
+  font-size: min(calc(1rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.125rem);
+  font-weight: 700;
+  color: #323232;
+}
+body .top-information .sku-selector .buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+  flex-direction: column;
+  gap: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+}
+body .top-information .sku-selector .buttons button {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  border: 1px solid rgba(100, 100, 100, 0.6);
+  border-radius: 1rem;
+  padding: min(calc(0.125rem + 0.625 * (100vw - 22.5rem) / 77.5), 0.75rem);
+  color: rgba(100, 100, 100, 0.6);
+  font-size: min(calc(0.875rem + 0.125 * (100vw - 22.5rem) / 77.5), 1rem);
+  cursor: pointer;
+}
+body .top-information .sku-selector .buttons button:hover {
+  border-color: #FF9F24;
+  color: #FF9F24;
+}
+body .top-information .bottom-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 3.75rem;
+  padding-bottom: 1.875rem;
+}
+body .top-information .bottom-content svg {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #FF9F24;
+}
+body .top-information .bottom-content .add-to-cart {
+  appearance: none;
+  border: none;
+  background-color: #FF9F24;
+  color: #FFF;
+  font-size: min(calc(1rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.125rem);
+  font-weight: 500;
+  padding: min(calc(1rem + 0.125 * (100vw - 22.5rem) / 77.5), 1.125rem) min(calc(1.125rem + 0.1875 * (100vw - 22.5rem) / 77.5), 1.3125rem);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: auto;
+  flex-grow: 1;
+}
+body .top-information .bottom-content .add-to-cart:hover {
+  background-color: #323232;
+}
+body .mobile-navigation {
+  display: none;
+}
+@media (min-width: 48rem) {
+  body .mobile-navigation {
+    display: flex;
+  }
+}
+
+/*# sourceMappingURL=product-detail.css.map */

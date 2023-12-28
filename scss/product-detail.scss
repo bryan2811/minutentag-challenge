@@ -1,0 +1,187 @@
+@use 'functions' as *;
+@use 'abstract/breakpoints' as *;
+
+@import 'reset';
+@import 'variables';
+@import 'mobile-navigation';
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+    background-color: $primary;
+    font-family: 'DM Sans', sans-serif;
+    max-width: rem(1920);
+    margin: 0 auto;
+    padding: 0 fluid(18px, 36px);
+
+    @include media('>=phone') {
+        padding: 0 fluid(18px, 36px) rem(70) fluid(18px, 36px);
+    }
+
+    .top-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: fluid(50, 30);
+
+        h1 {
+            font-size: fluid(18, 22);
+            font-weight: 700;
+            color: $dark;
+        }
+    }
+
+    .product-layout {
+        @include media('>=phone') {
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .product-img {
+        width: 100%;
+        height: fluid(240px, 300px);
+        object-fit: contain;
+    }
+
+    .top-information {
+        display: flex;
+        flex-direction: column;
+        gap: rem(4);
+
+        .brand-price {
+            display: flex;
+            justify-content: space-between;
+
+            h2 {
+                font-size: fluid(22, 24);
+                font-weight: 700;
+                color: $dark-2;
+            }
+
+            span {
+                font-size: fluid(22, 24);
+                font-weight: 700;
+                color: $secondary;
+            }
+        }
+
+        .origin-stock {
+            font-size: fluid(14, 16);
+            color: $gray-2;
+        }
+
+        .product-information {
+            display: flex;
+            flex-direction: column;
+            gap: rem(8);
+            padding-top: fluid(32, 38);
+            padding-bottom: fluid(20, 24);
+
+            h2 {
+                font-size: fluid(16, 18);
+                font-weight: 700;
+                color: $dark;
+            }
+
+            .text {
+                p {
+                    font-size: fluid(14, 16);
+                    color: $gray-2;
+                }
+
+                button {
+                    appearance: none;
+                    border: none;
+                    background-color: transparent;
+                    color: $secondary;
+                    font-size: fluid(14, 16);
+                    font-weight: 700;
+                    cursor: pointer;
+                    padding: 0;
+                
+                }
+            }
+        }
+
+        .sku-selector {
+            display: flex;
+            flex-direction: column;
+            gap: rem(13);
+
+            h2 {
+                font-size: fluid(16, 18);
+                font-weight: 700;
+                color: $dark;
+            }
+
+            .buttons {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+                flex-direction: column;
+                gap: fluid(14, 16);
+
+                button {
+                    appearance: none;
+                    border: none;
+                    background-color: transparent;
+                    border: 1px solid $medium-dark;
+                    border-radius: rem(16);
+                    padding: fluid(2, 12);
+                    color: $medium-dark;
+                    font-size: fluid(14px, 16px);
+                    cursor: pointer;
+
+                    &:hover {
+                        border-color: $secondary;
+                        color: $secondary;
+                    }
+                }
+            }
+        }
+
+        .bottom-content {
+            display: flex;
+            align-items: center;
+            gap: rem(24);
+            padding-top: rem(60);
+            padding-bottom: rem(30);
+
+            svg {
+                padding: rem(8);
+                border-radius: rem(12);
+                border: 1px solid $secondary;
+            }
+
+            .add-to-cart {
+                appearance: none;
+                border: none;
+                background-color: $secondary;
+                color: #FFF;
+                font-size: fluid(16, 18);
+                font-weight: 500;
+                padding: fluid(16, 18) fluid(18, 21);
+                border-radius: rem(12);
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+                margin-left: auto;
+                flex-grow: 1;
+
+                &:hover {
+                    background-color: $dark;
+                }
+            }
+        }
+    }
+
+    .mobile-navigation {
+        display: none;
+
+        @include media('>=phone') {
+            display: flex;
+        }
+    }
+}

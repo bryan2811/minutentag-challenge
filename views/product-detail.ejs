@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><%= product.brand %></title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="/css/product-detail.css">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="top-navigation">
+            <a href="#" onclick="history.back();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="5" y="11" width="15" height="1.5" fill="#323232"/>
+                    <path d="M11 5.20001L4 11.7L11 18.2" stroke="#323232" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </a>
+
+            <h1>Detail</h1>
+
+            <div class="more-options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="5.5" cy="11.5" r="1.5" fill="#323232"/>
+                    <circle cx="12.5" cy="11.5" r="1.5" fill="#323232"/>
+                    <circle cx="19.5" cy="11.5" r="1.5" fill="#323232"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="product-layout">
+            <img class="product-img" src="<%= product.image %>" alt="<%= product.brand %>">
+
+            <div class="product-content">
+                <div class="top-information">
+                    <div x-data="{
+                        product: <%= JSON.stringify(product) %>,
+                        selectedSku: '<%= product.skus[0].code %>',
+                        isDescriptionExpanded: false,
+                        updateSkuData: function(skuCode) {
+                            fetch(`/api/stock-price/${skuCode}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                this.selectedSku = skuCode;
+                                document.getElementById('price').textContent = '$' + (data.price / 100).toFixed(2);
+                                document.getElementById('stock').textContent = 'Stock: ' + data.stock;
+                            });
+                        },
+                        toggleDescription: function() {
+                            this.isDescriptionExpanded = !this.isDescriptionExpanded;
+                        }
+                    }"
+                    x-init="updateSkuData(selectedSku)">
+
+                        <div class="top-information">
+                            <div class="brand-price">
+                                <h2><%= product.brand %></h2>
+                                <span id="price"></span>
+                            </div>
+
+                            <div class="origin-stock">
+                                <span>Origin: Import | </span>
+                                <span id="stock"></span>
+                            </div>
+
+                            <div class="product-information">
+                                <h2>Description</h2>
+
+                                <div class="text">
+                                    <p x-text="isDescriptionExpanded ? product.information : product.information.substring(0, 190) + '...'"></p>
+                                    <button x-on:click="toggleDescription()" x-text="isDescriptionExpanded ? 'Read Less' : 'Read More'"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sku-selector">
+                            <h2>Size</h2>
+                            <div class="buttons">
+                                <template x-for="sku in product.skus" :key="sku.code">
+                                    <button x-text="sku.name" x-on:click="updateSkuData(sku.code)"></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="bottom-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="6" r="4.25" stroke="#FF9F24" stroke-width="1.5"/>
+                                <path d="M4.30623 9.59689C4.50953 7.97049 5.89208 6.75 7.53113 6.75H16.4689C18.1079 6.75 19.4905 7.97049 19.6938 9.59689L20.6938 17.5969C20.9362 19.5367 19.4237 21.25 17.4689 21.25H6.53113C4.57626 21.25 3.06375 19.5367 3.30623 17.5969L4.30623 9.59689Z" fill="white" stroke="#FF9F24" stroke-width="1.5"/>
+                                <circle cx="9.75" cy="10.75" r="0.75" fill="#FF9F24"/>
+                                <circle cx="13.75" cy="10.75" r="0.75" fill="#FF9F24"/>
+                            </svg>
+
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('mobile-navigation'); -%>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </body>
+</html>

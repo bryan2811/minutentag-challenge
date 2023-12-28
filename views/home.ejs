@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beer E-Commerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <button class="menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0F0D23">
+            <rect x="4" y="5" width="16" height="1.5" rx="0.75"/>
+            <rect x="4" y="11" width="10" height="1.5" rx="0.75"/>
+            <rect x="4" y="17" width="16" height="1.5" rx="0.75"/>
+        </svg>
+    </button>
+
+    <img class="avatar" src="/images/avatar.jpg" alt="Avatar">
+  </header>
+
+  <div class="welcome-section">
+    <span>Hi Mr. Michael,</span>
+    <h1>Welcome Back!</h1>
+  </div>
+
+  <div class="search-box">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <g opacity="0.3">
+          <circle cx="11.0647" cy="11.0647" r="6.31471" stroke="#0F0D23" stroke-width="1.5"/>
+          <path d="M16.0924 15.8441L19 18.6466" stroke="#0F0D23" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+    </svg>
+    <input type="text" placeholder="Search burger, pizza, drink or ect...">
+  </div>
+
+  <div class="product-categories">
+    <div class="headline">
+        <h2>Drink Category</h2>
+        <button>See All</button>
+    </div>
+
+    <div class="categories">
+        <button>All</button>
+        <button class="beer-btn">
+            <img src="/images/Beer.png" alt="Beer Icon">
+            <span>Beer</span>
+        </button>
+        <button class="wine-btn">
+            <img src="/images/Wine-glass.png" alt="Wine Icon">
+            <span>Wine</span>
+        </button>
+    </div>
+  </div>
+
+  <div class="product-listing-headline">
+    <h2>Populer</h2>
+    <button>See All</button>
+  </div>
+
+  <div class="product-listing" x-data="{ products: <%= JSON.stringify(products) %> }" x-init="setInterval(() => { products.forEach(product => { fetch(`/api/stock-price/${product.skus[0].code}`).then(response => response.json()).then(data => { document.getElementById(`price-${product.id}`).textContent = '$' + (data.price / 100).toFixed(2); }); }); }, 5000)">
+
+    <template x-for="product in products">
+      <div class="product">
+          <a x-bind:href="`/${product.id}-${product.brand.toLowerCase().replace(' ', '-')}`">
+            <h2 x-text="product.brand"></h2>
+            <img x-bind:src="product.image" x-bind:alt="product.brand">
+
+            <div class="price">
+                <span x-bind:id="`price-${product.id}`" x-text="isNaN(product.price) ? 'Loading...' : (product.price / 100).toFixed(2)"></span>
+
+                <div class="add-to-cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect x="11" y="5" width="2" height="14" rx="1" fill="white"/>
+                        <rect x="5" y="13" width="2" height="14" rx="1" transform="rotate(-90 5 13)" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+          </a>
+      </div>
+    </template>
+  </div>
+
+  <%- include('mobile-navigation'); -%>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
